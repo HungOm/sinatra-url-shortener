@@ -13,9 +13,9 @@ class ApplicationController < Sinatra::Base
 
   # Renders the home or index page
   get '/' do
-
+    urls = Url.all
+    @count = urls.count
     @message = session[:message]
-
     erb :home, layout: :layout
 
   end
@@ -31,9 +31,7 @@ class ApplicationController < Sinatra::Base
     user = User.create(name:params["name"], email: params["email"])
     # byebug
     user.password = params["psw"]
-    byebug
     user.save
-
     session[:user_id] = user.id
     # byebug
     redirect '/users/home'
@@ -69,12 +67,6 @@ class ApplicationController < Sinatra::Base
   # Renders the user's individual home/account page. 
   get '/users/home' do
     @user= User.find(session[:user_id])
-    # @message
-    # if @message.empty?
-    #   @message = "Welcome to Recode url shortener page"
-    # else
-    #   @message
-    # end
     erb :'/users/home'
 
   end
@@ -100,16 +92,22 @@ class ApplicationController < Sinatra::Base
 
       user =User.find_by(session[:user_id])
       if user.nil?
-        raw_url = Url.find_or_create_by(url_s:@user_input_url,shortenedurl:@user_short_url)
-        short_url = raw_url.shortenedurl
-        @url = Url.generate_url(short_url)
+        check_url = Url.find_by(url_s:@user_input_url)
+        if check_url == nil
+          raw_url = Url.find_or_create_by(url_s:@user_input_url,shortenedurl:@user_short_url)
+          short_url = raw_url.shortenedurl
+          @url = Url.generate_url(short_url)
+        else
+          short_url = check_url.shortenedurl
+          @url = Url.generate_url(short_url)
+        end
       else
 
         raw_url = Url.create(url_s:url,shortenedurl:@user_short_url,user_id:session[:user_id])
         short_url = raw_url.shortenedurl
         @url = Url.generate_url(short_url)
       end
-      session[:message] = "congratulations! \n Your short url is generated\n url: #{@url}"
+      session[:message] = "#{@url}"
       
       redirect '/'
     end
@@ -121,11 +119,12 @@ class ApplicationController < Sinatra::Base
   get "/url/:id" do
 
     link = params[:id]
-    # puts "#{link}"
+    puts "#{link}"
     my_url =Url.find_by(shortenedurl:link)
     # "#{@url.url_s}"
     url_short = my_url.url_s
-    open_url = Url.url_opener(url_short)
+    url = url_short.sub(/(^\w+:|^)\/\//, '')
+    open_url = Url.url_opener(url)
     redirect open_url
 
   end

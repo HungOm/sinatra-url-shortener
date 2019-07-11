@@ -11,11 +11,13 @@ class Url < ActiveRecord::Base
     end
 
     def self.generate_url(url)
-        "http://127.0.0.1:9393/url/#{@url}"
+        url = "http://127.0.0.1:9393/url/" + "#{url}"
+        url
     end
 
     def self.url_opener(url)
-        "https://"+url 
+        url = "https://"+url 
+        url
     end
 
     def self.valid_url?(url)
