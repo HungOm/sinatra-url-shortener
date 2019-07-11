@@ -1,0 +1,20 @@
+development:
+  adapter: postgresql
+  endcoding: unicode
+  database: user_authdevelopment
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: user_authtest
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: user_authproduction
+  pool: 5
+  timeout: 5000
