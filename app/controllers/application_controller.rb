@@ -41,7 +41,12 @@ class ApplicationController < Sinatra::Base
   end
   
   get '/sessions/login' do
-    erb :'/sessions/login'
+    if session[:user_id]==nil
+      erb :'/sessions/login'
+    else
+      session[:status_message] = "you're already logged in"
+      redirect '/'
+    end
   end
 
   post '/sessions' do
@@ -72,12 +77,14 @@ class ApplicationController < Sinatra::Base
     if session[:user_id]!= nil
       @last_five_urls= Url.order({ created_at: :desc }).limit(5)
       @message = session[:message]
+      
       if @message == nil 
         @message = "Please enter the new url"
       end
       @user= User.find(session[:user_id])
       erb :'/users/home'
     else
+      session[:status_message] = "Please register or log in"
       redirect '/'
     end
 
