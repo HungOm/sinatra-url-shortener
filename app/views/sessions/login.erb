@@ -1,32 +1,15 @@
+
+<link rel="stylesheet" type="text/css" href="/db/public/login.css">
+
+
 <h1>Log In Below:</h1>
 
 
-<%# <form action="/sessions" method="POST">
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" password="password" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form> %>
-<%# 
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-
-</style>
-</head>
-<body> %>
-
-
-
 <h2>Login Form</h2>
+
+<div>
+  <h3><%=session[:status_message]%></h3>
+</div>
 
 <form action="/sessions" method="POST">
   <div class="imgcontainer">

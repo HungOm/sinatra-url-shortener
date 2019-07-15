@@ -1,34 +1,53 @@
-Welcome, <%=@user.name%>!
 
-<link rel="stylesheet" type="text/css" href="/public/login.css">
 
 
 <div class="container">
-    <br/>
+    <%# <br/> %>
+
+    <div class="justify-content-center">
+        <h4><%=session[:status_message]%></h4>
+        <h2><%=@user.name%>!</h3>
+    <div>
+
 	<div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
-            <form class="card card-sm">
+        <h3><span style ="color:green"><%=@count%></span> links has been shortened</h3>
+        <ol>
+        <%@last_five_urls.each do |url|%>
+            <li><%=url.shortenedurl%></li>
+        <%end%>
+
+        <ol>
+
+            <form class="card card-sm" action="/url_shorten" method="POST">
                 <div class="card-body row no-gutters align-items-center">
                     <div class="col-auto">
                         <i class="fas fa-search h4 text-body"></i>
                     </div>
                     <!--end of col-->
                     <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" type="text" placeholder="enter your link">
+                        <input class="form-control form-control-lg form-control-borderless" type="text" placeholder="enter your link" name="url">
                     </div>
                     <!--end of col-->
                     <div class="col-auto">
-                        <button class="btn btn-lg btn-success" type="submit">shorten</button>
+                        <button class="btn btn-lg btn-success" type="submit" for="url">shorten</button>
                     </div>
                     <!--end of col-->
                 </div>
             </form>
+            <div class="links col-12">
+            <div class="col-6">
+                <h3><%=@message%></h3>
+            </div>
+            <div class="col-6">
+                <h3><a href="/users/links">Display all links</a></h3>
+            </div>
+                
+            </div>
         </div>
         <!--end of col-->
     </div>
 </div>
-
-<a href="/sessions/logout">Log Out</a>
 
 
 

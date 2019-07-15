@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<head>
-  
-</head>
 
-<body>
-  <%# <h1>Welcome to Recode</h1> %>
-   <h1>Hello, Welcome to Sinatra web development 101 !</h1>
+<div class="container">
+
+<div>
+ <h1>Hello, Welcome to Sinatra web development 101 !</h1>
   <h4>Please sign up or log in to access your recode privileges!</h4>
    <div class="mr-4" style="padding-righ:30px;">
-    <h3> <%=@count%> urls has been shortened to date! Hurry now and be shortened today!</h3>
+        <h3 class="info"><span style ="color:green"><%=@count%></span> links has been shortened</h3>
   </div>
 
-  <form action="/url_shorten" method="POST">
+  </div>
+
+
+<div>
+ <form action="/url_shorten" method="POST" id="form">
 
     <div class="input-group mb-3" action="/url_shorten" method="POST">
       <input type="text" class="form-control" placeholder="enter your url" name="url">
@@ -22,24 +23,17 @@
 
 </form>
 
+
 <div>
-  <%# <h4><%=@message%> <%#/h4 %>
-  <%# <% if @mesaage == nil %>
-      <%# <h4>please enter your url</h4>  %>
-  <%# <% else %> 
-      <%# <h4>=@message</h4> %>
-  <%# <% end %> 
-
-<% if !@message == nil %>
-    <h4>please enter your url</h4> 
-<% else %>
-   <h4><%=@message%></h4>
-<% end %>
-
+  <h4 class="info"><%=@message%></h4>
 </div>
-  <a href="/registrations/signup">Sign Up</a>
-  <a href="/sessions/login">Log In</a>
+</div>
 
-</body>
 
-</html>
+
+
+
+
+<%# </body>
+
+</html> %>

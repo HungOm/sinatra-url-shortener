@@ -1,6 +1,14 @@
 require "open-uri"
 class Url < ActiveRecord::Base
+    @count =0
     # has_may :users
+    def self.add_count_shorten_times
+        @count += 1
+    end
+    
+    def self.count_shorten_times
+        @count
+    end
     
     belongs_to :user, foreign_key: :user_id 
 
@@ -26,7 +34,7 @@ class Url < ActiveRecord::Base
         if reslt == 0
             return true
         else
-            false
+            return false
         end
     end     
 end

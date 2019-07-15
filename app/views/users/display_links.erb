@@ -1,0 +1,55 @@
+<style>
+
+.card_wrapper{
+    display:flex;
+    flex-wrap:wrap;
+}
+.card{
+    margin:10px 10px 10px 10px;
+    box-shadow: 9px 7px 20px 0px black;
+    background-color: #d4cccc;
+
+}
+
+.container {
+    width: 100%;
+    /* padding-right: 15px; */
+    /* padding-left: 15px; */
+    margin-right: auto;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 10px;
+    grid-gap: 20px;
+}
+
+a {
+    /* color: #007bff; */
+    text-decoration: none;
+    background-color: transparent;
+    align-items: center;
+    align-self: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    */margin-left: 50%;
+    color: #2196F3;
+}
+
+</style>
+<div class="container">
+<%@all_urls.each do |url|%>
+<div class="card_wrapper">
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">My short link</h5>
+    <h6 class="card-subtitle mb-2 text-muted"><span>Original link:</span> <%=url.url_s%></h6>
+    <p class="card-text"><span>Shortened link:</span> <span style="color:blue"><a href="<%=url.shortenedurl%>" target="_blank"><%=url.shortenedurl%></a></span></p>
+    <a href="<%=url.shortenedurl%>" target = "_blank" class="card-link btn btn-success">open this link</a>
+    <a href="/delete/<%=url.id%>" class="card-link"><span class="btn btn-danger">Delete</span></a>
+  </div>
+</div>
+</div>
+
+<%end%>
+
+</div>
