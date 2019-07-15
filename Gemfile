@@ -12,7 +12,7 @@ gem 'shotgun'
 gem 'byebug'
 gem 'bcrypt'
 # gem 'shortener'
-# gem 'base58'
+gem 'base58'
 # gem 'open-uri'
 
 group :test do
