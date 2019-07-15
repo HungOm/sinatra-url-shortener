@@ -19,7 +19,7 @@ class Url < ActiveRecord::Base
     end
 
     def self.generate_url(url)
-        url = "http://127.0.0.1:9393/url/" + "#{url}"
+        url = "https://om-url-shortener.herokuapp.com/" + "#{url}"
         url
     end
 
